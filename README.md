@@ -1,94 +1,94 @@
-# Aegis AI // Exam Surveillance Suite
+# Aegis AI // 考试监控套件
 
-An autonomous, multi-candidate examination surveillance and proctoring system built with YOLOv8, 17-keypoint human pose estimation, spatial desk tracking, and temporal behavioral analysis.
-
-Designed to detect cheating across diverse camera perspectives (including oblique/diagonal CCTV viewpoints and straight-on classroom aisles) with high accuracy and zero false positives.
+一套自主化多考生考试监考系统，基于 YOLOv8、17 关键点人体姿态估计、课桌空间追踪与时序行为分析技术构建。
+适用于各类摄像头视角（包括斜向闭路监控视角与教室过道正向视角），能够高精度识别作弊行为，实现零误报。
 
 ---
 
-## 🚀 Quickstart (Run in 3 Steps)
+## 🚀 快速开始（三步运行）
 
-### 1. Clone & Enter Repository
+### 1. 克隆并进入项目目录
 ```bash
 git clone https://github.com/ShashankJangid/ai-exam-surveillance.git
 cd ai-exam-surveillance
 ```
 
-### 2. Create Virtual Environment & Install Dependencies
+### 2. 创建虚拟环境并安装依赖
 ```bash
-# Create virtual environment
+# 创建虚拟环境
 python -m venv .venv
 
-# Activate on Windows:
+# Windows 下激活：
 .venv\Scripts\activate
-# Or on Linux / macOS:
+# Linux / macOS 下激活：
 # source .venv/bin/activate
 
-# Install required packages
+# 安装所需依赖包
 pip install -r requirements.txt
 ```
 
-### 3. Launch Web Dashboard
+### 3. 启动 Web 控制台
 ```bash
 python app.py
 ```
-Open your browser and navigate to:
+用浏览器打开：
 ```text
 http://127.0.0.1:7860
 ```
 
 ---
 
-## 📖 How to Use the Application
+## 📖 应用使用说明
 
-### Method 1: Analyzing Recorded Exam Videos (Recommended)
+### 方式一：分析已录制的考试视频（推荐）
 
-1. **Upload Video:**
-   - In the **1. Surveillance Video Feed** panel, click **Upload** or drag-and-drop a video file.
-   - You can test immediately using either of the provided sample videos located in the `sample_videos/` folder:
-     - `sample_videos/155164-809618953.mp4` *(Classroom with diagonal camera, forward exam copying)*
-     - `sample_videos/7092083-hd_1920_1080_30fps.mp4` *(Classroom front view, students colluding across aisle)*
-2. **Select Operational Mode:**
-   - **Classroom / Exam Hall (CCTV):** Multi-student mode. Tracks all candidates at their desks, monitors forward desk intrusion, aisle turning, and cell phone usage.
-   - **Remote Online Exam (Webcam):** Single-candidate remote proctoring mode. Flags absence from desk, multiple people in room, looking away, or phone use.
-3. **Configure Frame Skip (Acceleration):**
-   - Default is `3x` (processes 1 in every 3 frames). This accelerates processing by ~400% with full temporal fidelity.
-   - Use `1x` if you require strict frame-by-frame annotation.
-4. **Click "Analyze Stream":**
-   - A real-time progress bar will indicate processing status.
-5. **Review the Results:**
-   - **Annotated Stream:** Watch the processed video with live bounding boxes:
-     - 🟩 **Emerald Green:** Normal, attentive writing behavior.
-     - 🟥 **Bright Red with Badge:** Confirmed cheating violation.
-     - 🟦 **Blue Box:** Prohibited contraband (cell phone) detected in desk area.
-   - **Executive KPI Cards:** Review total monitored candidates, flagged violations, clean candidates, and room integrity index.
-   - **Visual Forensic Proof Gallery:** Click on any captured keyframe snapshot to view a high-resolution, timestamped proof of the infraction.
-   - **Incident Log Table:** Chronological record detailing timestamps, candidate IDs, violation categories, and confidence percentages.
-   - **Download Audit Dossier:** Click **Download Report (JSON)** to export a complete, machine-readable forensic dossier for administrative records.
-
----
-
-### Method 2: Live Webcam Proctoring
-
-1. Click on the **Webcam** tab in the video input box.
-2. Grant browser camera permissions.
-3. Record a clip or session.
-4. Select **Remote Online Exam (Webcam)** mode.
-5. Click **Analyze Stream** to inspect proctoring compliance.
+1. **上传视频：**
+   - 在 **1. 监考视频输入** 面板中点击 **上传**，或将视频文件拖拽到该区域。
+   - 也可以直接点击 **快速示例视频（点击加载）** 中的示例一键载入。
+   - 或使用 `sample_videos/` 目录中自带的示例视频手动测试：
+     - `sample_videos/155164-809618953.mp4` *（斜向机位教室，向前偷看抄袭）*
+     - `sample_videos/7092083-hd_1920_1080_30fps.mp4` *（教室正面机位，过道两侧串通）*
+2. **选择运行模式：**
+   - **教室 / 考场监控（CCTV）：** 多考生模式。追踪课桌前全部考生，监测向前探头偷看、转头看向过道、手机使用行为。
+   - **远程在线考试（摄像头）：** 单人远程监考模式。检测考生离开座位、室内出现多人、视线偏移、使用手机等行为。
+3. **配置抽帧间隔（加速）：**
+   - 默认`3`（每 3 帧只处理 1 帧）。处理速度提升约 400%，同时保留完整时序行为信息。
+   - 如果需要逐帧完整标注，请设置为`1`。
+4. **点击 “开始分析”：**
+   - 实时进度条展示处理进度。
+5. **查看分析结果：**
+   - **标注后的输出画面：** 观看处理后带实时标注框的视频：
+     - 🟩 **翠绿色：** 状态正常，考生专注答题。
+     - 🟥 **红色标记：** 确认存在作弊违规行为。
+     - 🟦 **蓝色框：** 检测到课桌区域出现违禁物品（手机）。
+   - **关键指标卡片**：查看受监控考生总数、标记违规数、无违规考生数、考场诚信指数。
+   - **违规证据截图**：点击任意抓拍关键帧，查看带时间戳的高清违规证据截图。
+   - **违规事件记录**：按时间顺序记录时间戳、考生编号、违规类型、置信度。
+   - **下载审查报告**：点击**下载审查报告（JSON）**，导出机器可读的完整取证档案，用于教务存档。
 
 ---
 
-### Method 3: Programmatic Python API
+### 方式二：摄像头实时监考
 
-You can import and integrate the surveillance engine into your own Python applications or batch processing scripts:
+1. 在视频输入框切换到**摄像头**标签页。
+2. 授予浏览器摄像头权限。
+3. 录制片段或者完整会话。
+4. 选择**远程在线考试（摄像头）**模式。
+5. 点击**开始分析**，检查考生考试合规情况。
+
+---
+
+### 方式三：Python API 调用
+
+可以把监考引擎导入到你自己的 Python 应用或批处理脚本中：
 
 ```python
 from src.pipeline import SurveillancePipeline
 
-# Initialize the pipeline
+# 初始化流水线
 pipeline = SurveillancePipeline()
 
-# Process video file
+# 处理视频文件
 output_video_path, incidents, summary, snapshots, stats = pipeline.process_video(
     video_path="sample_videos/155164-809618953.mp4",
     mode="Classroom / Exam Hall (CCTV)",
@@ -98,88 +98,99 @@ output_video_path, incidents, summary, snapshots, stats = pipeline.process_video
 print(summary)
 print(f"Room Integrity: {stats['integrity_score']}")
 
-# Iterate through flagged incidents
+# 遍历被标记的违规事件
 for incident in incidents:
     print(f"[{incident['timestamp']}] {incident['student_id']}: {incident['violation']} (Severity: {incident['severity']})")
 ```
 
+> **注意：** `mode` 参数需传入英文值（`"Classroom / Exam Hall (CCTV)"` 或 `"Remote Online Exam (Webcam)"`）。网页上显示的中文标签只是展示层的翻译，不影响引擎内部判断。
+>
+> 同样地，返回的 `incidents` 与导出的 JSON 报告中，`violation`、`severity` 等字段均保持英文原值，便于程序化处理；只有网页界面会显示为中文。
+
 ---
 
-## 🎯 Benchmark Evaluation & Sample Videos
+## 🎯 基准评测与示例视频
 
-The repository includes two real-world examination test recordings in the `sample_videos/` folder:
+仓库在 `sample_videos/` 目录中提供了两段真实考场录像：
 
-| Sample Video | Scenario & Camera Angle | Candidates Monitored | Flagged Candidates | Clean Candidates | False Alarms | Detected Violations |
+| 示例视频 | 场景与机位 | 受监控考生 | 标记违规考生 | 无违规考生 | 误报 | 检出的违规行为 |
 | :--- | :--- | :---: | :---: | :---: | :---: | :--- |
-| **`sample_videos/155164-809618953.mp4`** | Oblique / diagonal CCTV angle | **5** | **1** (`Student #2`) | **4** | **0** | `Peeking & Copying from Student in Front` at 4.3s, 6.9s, 11.7s, 14.3s, 16.9s, 21.9s |
-| **`sample_videos/7092083-hd_1920_1080_30fps.mp4`** | Front classroom view | **5** | **2** (`Student #3` & `#5`) | **3** | **0** | `Peeking Across Aisle (Right)` [2.2s, 4.7s, 7.2s] & `Peeking Across Aisle (Left)` [2.9s] |
+| **`sample_videos/155164-809618953.mp4`** | 斜向闭路监控机位 | **5** | **1**（`学生 #2`） | **4** | **0** | `偷看并抄袭前排考生` 于 4.3s、6.9s、11.7s、14.3s、16.9s、21.9s |
+| **`sample_videos/7092083-hd_1920_1080_30fps.mp4`** | 教室正面机位 | **5** | **2**（`学生 #3` 与 `#5`） | **3** | **0** | `隔排偷看 / 传递信息（右侧）` [2.2s、4.7s、7.2s] 与 `隔排偷看 / 传递信息（左侧）` [2.9s] |
 
-Both videos run through the exact same unified pipeline sequentially without changing any settings or thresholds.
-
----
-
-## 🔬 How the Technology Works
-
-1. **Stationary Seated Desk Tracking (`src/tracker.py`):**
-   - Traditional IoU tracking often swaps IDs when students lean forward or shift posture.
-   - Aegis anchors each student to their physical desk center using Euclidean centroid tracking with an Exponential Moving Average (EMA). Each student retains a permanent ID throughout the entire exam.
-2. **Scale-Invariant Posture Normalization (`src/pose_analyzer.py`):**
-   - Normalized gaze yaw and pitch are calculated by dividing head position by shoulder width.
-   - Shoulder width is clamped to a minimum of 70px, preventing numerical division explosion on distant, background candidates.
-3. **Dynamic Seating Baseline:**
-   - During the first 2.5 seconds, the engine learns each student's normal writing posture to neutralize natural camera angles.
-4. **Anatomical Multi-Vector Rules (`src/rules_engine.py`):**
-   - **Forward Exam Copying:** Triggered when a student leans forward and raises their pitch toward the front desk ($\Delta\text{pitch} < -0.30, \Delta\text{yaw} > 0.16$).
-   - **Aisle Collusion:** Requires both baseline deviation and true anatomical lateral head rotation ($\Delta\text{yaw} > 0.35$ with positive yaw for Right, $\Delta\text{yaw} < -0.35$ with negative yaw for Left).
-   - **Sustained Duration:** Requires sustained posture for $\ge 0.6\text{s} - 0.7\text{s}$ before triggering, ignoring brief natural head adjustments.
+两段视频都使用完全相同的统一流水线依次处理，未调整任何设置或阈值。
 
 ---
 
-## 📂 Repository Directory Layout
+## 🔬 技术实现原理
+
+1. **固定座位课桌追踪（`src/tracker.py`）**
+传统交并比追踪算法，当考生身体前倾、姿态变化时容易发生 ID 混淆错乱。
+Aegis 系统将每个考生绑定到课桌中心点，使用指数移动平均（EMA）欧式质心追踪。考生在整场考试内保持固定唯一编号。
+2. **不受画面缩放影响姿态归一化（`src/pose_analyzer.py`）**
+通过头部位置除以肩宽计算归一化的水平、垂直视线偏转角度。
+肩宽数值下限限制为 70 像素，避免画面远处考生带来的数值计算溢出。
+3. **动态座位基准学习**
+程序运行最初 2.5 秒，学习每个考生正常答题姿态，抵消不同摄像头拍摄角度带来的影响。
+4. **多维度人体姿态判定规则（`src/rules_engine.py`）**
+
+- **向前抄袭偷看**：考生身体前倾，头部俯仰角度向前偏移（俯仰变化值＜‑0.30，水平偏转＞0.16）触发告警。
+- **过道两侧串通**：同时满足基准姿态偏移以及真实头部水平转动（向右偏转＞0.35，向左偏转＜‑0.35）。
+- **持续时间过滤**：姿态异常必须维持 0.6‑0.7 秒以上才判定违规，过滤考生短暂自然转头动作。
+
+---
+
+## 📂 项目目录结构
 
 ```text
 ai-exam-surveillance/
 ├── sample_videos/
-│   ├── 155164-809618953.mp4           # Benchmark Video 1 (Forward Peeking)
-│   └── 7092083-hd_1920_1080_30fps.mp4 # Benchmark Video 2 (Aisle Collusion)
+│   ├── 155164-809618953.mp4           # 测试视频1（向前偷看抄袭）
+│   └── 7092083-hd_1920_1080_30fps.mp4 # 测试视频2（过道两侧串通）
 ├── src/
 │   ├── __init__.py
-│   ├── detector.py                    # Prohibited object & contraband detection
-│   ├── pose_analyzer.py               # Scale-invariant 17-keypoint gaze estimation
-│   ├── tracker.py                     # Seated desk-anchored tracking
-│   ├── rules_engine.py                # Temporal violation state machine
-│   └── pipeline.py                    # Stream orchestrator & video encoder
-├── app.py                             # Interactive Gradio web application
-├── openh264-2.5.0-win64.dll           # OpenH264 library for native browser playback
-├── yolov8n.pt                         # YOLOv8 object detection weights
-├── yolov8n-pose.pt                    # YOLOv8 pose estimation weights
-├── requirements.txt                   # Dependency manifest
-├── LICENSE                            # MIT License
-└── README.md                          # Documentation
+│   ├── detector.py                    # 违禁物品与设备检测
+│   ├── pose_analyzer.py               # 基于17关键点、不受缩放影响的视线估算
+│   ├── tracker.py                     # 绑定课桌的考生追踪模块
+│   ├── rules_engine.py                # 时序违规状态机
+│   ├── i18n.py                        # 网页界面中文文案（纯展示层翻译）
+│   └── pipeline.py                    # 视频流调度与视频编码
+├── app.py                             # Gradio交互式网页程序
+├── openh264-2.5.0-win64.dll           # OpenH264库，用于浏览器播放视频
+├── yolov8n.pt                         # YOLOv8目标检测权重文件
+├── yolov8n-pose.pt                    # YOLOv8姿态估计权重文件
+├── requirements.txt                   # 依赖清单
+├── LICENSE                            # MIT开源协议
+└── README.md                          # 项目说明文档
 ```
 
 ---
 
-## 🛠️ Frequently Asked Questions (FAQ)
+## 🛠️ 常见问题（FAQ）
 
 <details>
-<summary><b>1. Port 7860 is already in use. How do I change the port?</b></summary>
-In <code>app.py</code>, change the last line:
+<summary><b>1. 7860 端口已被占用，怎么换端口？</b></summary>
+在 <code>app.py</code> 最后一行修改：
 <pre><code>demo.launch(server_name="127.0.0.1", server_port=8080)</code></pre>
 </details>
 
 <details>
-<summary><b>2. How do I enable GPU acceleration?</b></summary>
-If you have an NVIDIA GPU with CUDA installed, PyTorch and Ultralytics will automatically utilize the GPU. No code changes are required.
+<summary><b>2. 如何启用 GPU 加速？</b></summary>
+如果装有 NVIDIA 显卡并已配置 CUDA，PyTorch 与 Ultralytics 会自动使用 GPU，无需修改任何代码。
 </details>
 
 <details>
-<summary><b>3. Why is openh264 included?</b></summary>
-OpenCV on Windows requires the Cisco OpenH264 binary to encode standard H.264 (<code>avc1</code>) MP4 videos. Including the DLL ensures browser-playable video output out of the box without manual codec installations.
+<summary><b>3. 为什么要附带 openh264？</b></summary>
+Windows 上的 OpenCV 需要 Cisco OpenH264 动态库才能编码标准 H.264（<code>avc1</code>）MP4 视频。附带该 DLL 可确保开箱即得浏览器可播放的输出视频，无需手动安装编解码器。
+</details>
+
+<details>
+<summary><b>4. 输出视频里的人物标注为什么还是英文？</b></summary>
+视频画面上的文字由 <code>cv2.putText</code> 绘制，其内置的 Hershey 字体只支持 ASCII 字符，无法渲染中文。因此标注叠加层保持英文，中文只应用在网页界面上。
 </details>
 
 ---
 
-## 📜 License
+## 📜 开源协议
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+本项目基于 MIT 协议开源，详见 [LICENSE](LICENSE) 文件。

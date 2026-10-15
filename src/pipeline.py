@@ -7,6 +7,7 @@ from src.tracker import StudentTracker
 from src.detector import ObjectDetector
 from src.pose_analyzer import PoseAnalyzer
 from src.rules_engine import ExamRulesEngine
+from src import i18n
 
 class SurveillancePipeline:
     def __init__(self, obj_detector=None, pose_analyzer=None):
@@ -63,7 +64,7 @@ class SurveillancePipeline:
 
             if progress_callback and total_frames > 0:
                 pct = min(0.98, frame_idx / total_frames)
-                progress_callback(pct, desc=f"Analyzing stream... {int(pct * 100)}%")
+                progress_callback(pct, desc=f"正在分析视频流... {int(pct * 100)}%")
 
             if (orig_w, orig_h) != (target_w, target_h):
                 frame = cv2.resize(frame, (target_w, target_h))
@@ -82,7 +83,10 @@ class SurveillancePipeline:
                 for inc in new_incidents:
                     snap_path = os.path.join(snapshot_dir, f"incident_{len(snapshots)+1}_{int(timestamp*10)}ds.jpg")
                     cv2.imwrite(snap_path, frame)
-                    caption = f"{inc['student_id']} | {inc['violation']} @ {inc['timestamp']}"
+                    caption = (
+                        f"{i18n.translate_student_id(inc['student_id'])} | "
+                        f"{i18n.translate_violation(inc['violation'])} @ {inc['timestamp']}"
+                    )
                     snapshots.append((snap_path, caption))
 
             writer.write(frame)

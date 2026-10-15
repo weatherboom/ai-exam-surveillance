@@ -10,3 +10,10 @@ ENV/
 frame_*.jpg
 new_video_frame_*.jpg
 .system_generated/
+
+# Gradio 运行缓存（含自签名证书）
+.gradio/
+
+# 本地测试视频与流水线输出，体积大，不入库
+new_datasets/
+results/
